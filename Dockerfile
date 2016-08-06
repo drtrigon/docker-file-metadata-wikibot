@@ -8,9 +8,9 @@ RUN wikibot-filemeta-log || \
 
 # Show some info about usage of wikibot commands
 RUN wikibot-filemeta-log || true
-RUN wikibot-filemeta-log -help
+RUN wikibot-filemeta-log -help || true
 RUN wikibot-filemeta-simple || true
-RUN wikibot-filemeta-simple -help
+RUN wikibot-filemeta-simple -help || true
 
 
 ### vvv  seperate Dockerfile for testing  vvv ###
