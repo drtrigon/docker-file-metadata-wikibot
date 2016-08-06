@@ -9,17 +9,3 @@ RUN pip install git+https://gerrit.wikimedia.org/r/pywikibot/core.git#egg=pywiki
 # Show some info about usage of wikibot commands
 RUN wikibot-filemeta-log -help || true
 RUN wikibot-filemeta-simple -help || true
-
-
-### vvv  seperate Dockerfile for testing  vvv ###
-
-# Setup hacky login work-a-round for testing
-#RUN wikibot-create-config
-
-#ADD user-config.py .
-#ADD pywikibot.lwp.hack .
-#ADD login-hack.py .
-
-# Bot test runs
-#RUN wikibot-filemeta-log -search:'eth-bib' -limit:5 -logname:test -dry
-#RUN wikibot-filemeta-simple -cat:SVG_files -limit:5
