@@ -1,0 +1,37 @@
+language: bash
+
+sudo: false
+
+env:
+  - DOCKERFILE=Dockerfile DOCKERTAG=ubuntu-14.04
+
+services:
+  - docker
+
+install:
+  - COMMIT=${TRAVIS_COMMIT::8} ;
+  - REPO=drtrigon/file-metadata-wikibot ;
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS ;
+  - docker build -f $DOCKERFILE -t $REPO:$COMMIT . ;
+  - docker tag $REPO:$COMMIT $REPO:$DOCKERTAG ;
+  # - docker tag $REPO:$COMMIT $REPO:travis-$TRAVIS_BUILD_NUMBER ;
+  - if [[ "$DOCKERTAG" == "ubuntu-14.04" ]] ; then
+      docker tag $REPO:$COMMIT $REPO:latest ;
+    fi
+
+script:
+  - docker images ; docker ps -a ;
+  - export DOCKERCONTAINER=`sudo docker run -d $REPO:$COMMIT` ;
+  # - docker exec wikibot-create-config ;
+  - docker cp user-config.py $DOCKERCONTAINER:/user-config.py ;
+  - docker cp pywikibot.lwp.hack $DOCKERCONTAINER:/pywikibot.lwp.hack ;
+  - docker cp login-hack.py $DOCKERCONTAINER:/login-hack.py ;
+  - docker exec $DOCKERCONTAINER python login-hack.py $PYWIKIBOT_TOKEN ;
+  - docker exec $DOCKERCONTAINER wikibot-filemeta-log -search:'eth-bib' -limit:5 -logname:test -dry ;
+  - docker exec $DOCKERCONTAINER wikibot-filemeta-simple -cat:SVG_files -limit:5 ;
+  - docker rmi $REPO:$COMMIT ;
+  - docker images ; docker ps -a ;
+  # Upload to docker if it's on the master branch
+  - if [[ "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == "false" ]] ; then
+      docker push $REPO ;
+    fi
