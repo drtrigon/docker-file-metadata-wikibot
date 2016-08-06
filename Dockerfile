@@ -1,12 +1,10 @@
 FROM pywikibotcatfiles/file-metadata
 MAINTAINER DrTrigon <dr.trigon@surfeu.ch>
 
-RUN pip show pip
-
 # Installation of most recent (nightly) pywikibot
 #RUN git clone --branch 2.0 --recursive https://gerrit.wikimedia.org/r/pywikibot/core.git
 RUN wikibot-filemeta-log || \
-  pip install git+https://gerrit.wikimedia.org/r/pywikibot/core.git#egg=pywikibot --update
+  pip install git+https://gerrit.wikimedia.org/r/pywikibot/core.git#egg=pywikibot
 
 # Show some info about usage of wikibot commands
 RUN wikibot-filemeta-log || true
