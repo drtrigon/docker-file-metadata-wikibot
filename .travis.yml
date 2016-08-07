@@ -25,6 +25,8 @@ script:
   # - export CONTAINER=`docker run -d $REPO:$COMMIT` ;
   - docker run --name $CONTAINER -d $REPO:$COMMIT tail -f /dev/null ;
   - docker ps -a ;
+  - docker exec $CONTAINER type wikibot-filemeta-log ;
+  - docker exec $CONTAINER type wikibot-filemeta-simple ;
   - docker exec $CONTAINER wikibot-filemeta-log -help || true ;
   - docker exec $CONTAINER wikibot-filemeta-simple -help || true ;
   # - docker exec $CONTAINER wikibot-create-config ;
@@ -32,11 +34,16 @@ script:
   - docker cp pywikibot.lwp.hack $CONTAINER:/pywikibot.lwp.hack ;
   - docker cp login-hack.py $CONTAINER:/login-hack.py ;
   - docker exec $CONTAINER python login-hack.py $PYWIKIBOT_TOKEN ;
-  # - docker exec $CONTAINER wikibot-filemeta-log -search:'eth-bib' -limit:5 -logname:test -dry ;
+#  - docker exec $CONTAINER wikibot-filemeta-log -search:'eth-bib' -limit:5 -logname:test -dry ;
+# issue errorlevel<>0 ^^^ thus hacky cheat vvv - needs fix!
   - docker exec $CONTAINER wikibot-filemeta-log -search:'eth-bib' -limit:5 -logname:test -dry || true ;
   - docker exec $CONTAINER wikibot-filemeta-simple -cat:SVG_files -limit:5 ;
-  - docker exec $CONTAINER bash -c "python -m cProfile -s time wikibot-filemeta-log -search:'eth-bib' -limit:5 -dry > profile.out && head profile.out -n 150" ;
-  - docker exec $CONTAINER bash -c "sudo apt-get --yes install valgrind && valgrind --tool=massif --massif-out-file=massif.out --log-file=valgrind.log wikibot-filemeta-log -search:'eth-bib' -limit:5 -dry && cat valgrind.log && ms_print massif.out" ;
+  - docker exec $CONTAINER bash -c "python -m cProfile -s time /usr/local/bin/wikibot-filemeta-log -search:'eth-bib' -limit:5 -dry > profile.out && head profile.out -n 150" ;
+#  - docker exec $CONTAINER bash -c "sudo apt-get --yes install valgrind && valgrind --tool=massif --massif-out-file=massif.out --log-file=valgrind.log wikibot-filemeta-log -search:'eth-bib' -limit:5 -dry && cat valgrind.log && ms_print massif.out" ;
+  - docker exec $CONTAINER bash -c "sudo apt-get --yes install valgrind" ;
+  - docker exec $CONTAINER bash -c "valgrind --tool=massif --massif-out-file=massif.out --log-file=valgrind.log wikibot-filemeta-log -search:'eth-bib' -limit:5 -dry" ;
+  - docker exec $CONTAINER bash -c "cat valgrind.log" ;
+  - docker exec $CONTAINER bash -c "ms_print massif.out" ;
   - docker rmi $REPO:$COMMIT ;
   - docker images ; docker ps -a ;
   # Upload to docker if it's on the master branch
