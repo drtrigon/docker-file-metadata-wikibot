@@ -22,7 +22,7 @@ Supported tags and respective ``Dockerfile`` links:
  * `show all... <https://hub.docker.com/r/drtrigon/file-metadata-wikibot/tags/>`__
 
 For more information about this image and its history, please see
-``pywikibotcatfiles/file-metadata`` (`on githhub <https://github.com/pywikibot-catfiles/file-metadata>`__).
+``pywikibotcatfiles/file-metadata`` (`on github <https://github.com/pywikibot-catfiles/file-metadata>`__).
 This image is updated via ...
 
 Build status
