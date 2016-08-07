@@ -7,6 +7,30 @@ metadata that can be used from it.
 For more information on the package visit `pywikibot-catfiles/file-metadata
 <https://github.com/pywikibot-catfiles/file-metadata>`__.
 
+Development
+===========
+
+Docker
+------
+
+To pull the ``latest`` docker image use::
+
+    $ docker pull drtrigon/file-metadata-wikibot
+
+Supported tags and respective ``Dockerfile`` links:
+ * ``latest``, ``ubuntu-14.04`` (`docker/Dockerfile <https://github.com/drtrigon/file-metadata-wikibot/blob/master/Dockerfile.ubuntu>`__)
+ * `show all... <https://hub.docker.com/r/drtrigon/file-metadata-wikibot/tags/>`__
+
+For more information about this image and its history, please see
+``pywikibotcatfiles/file-metadata`` (`on docker-hub <https://hub.docker.com/r/pywikibotcatfiles/file-metadata/tags/>`__).
+This image is updated via ...
+
+Build status
+------------
+
+.. image:: https://travis-ci.org/drtrigon/docker-file-metadata-wikibot.svg?branch=master
+   :target: https://travis-ci.org/drtrigon/docker-file-metadata-wikibot
+
 Credits
 -------
 
@@ -28,4 +52,3 @@ This code falls under the
 Please note that some files or content may be copied from other places
 and have their own licenses. Dependencies that are being used to generate
 the databases also have their own licenses.
-
