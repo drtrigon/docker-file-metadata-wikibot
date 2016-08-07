@@ -1,35 +1,11 @@
 Introduction
 ============
 
-``file-metadata`` is a python package that aims to analyze files and find
-metadata that can be used from it.
+``file-metadata-wikibot`` is a python package that aims to analyze files and find
+metadata that can be used from it on Wikipedia Commons by using pywikibot.
 
-For more information on the package visit `pywikibot-catfiles/file-metadata
-<https://github.com/pywikibot-catfiles/file-metadata>`__.
-
-Development
-===========
-
-Docker
-------
-
-To pull the ``latest`` docker image use::
-
-    $ docker pull drtrigon/file-metadata-wikibot
-
-Supported tags and respective ``Dockerfile`` links:
- * ``latest``, ``ubuntu-14.04`` (`docker/Dockerfile <https://github.com/drtrigon/docker-file-metadata-wikibot/blob/master/Dockerfile>`__)
- * `show all... <https://hub.docker.com/r/drtrigon/file-metadata-wikibot/tags/>`__
-
-For more information about this image and its history, please see
-``pywikibotcatfiles/file-metadata`` (`on github <https://github.com/pywikibot-catfiles/file-metadata>`__).
-This image is updated via ...
-
-Build status
-------------
-
-.. image:: https://travis-ci.org/drtrigon/docker-file-metadata-wikibot.svg?branch=master
-   :target: https://travis-ci.org/drtrigon/docker-file-metadata-wikibot
+For more information on the package visit `drtrigon/file-metadata-wikibot
+<https://github.com/drtrigon/file-metadata-wikibot>`__.
 
 Credits
 -------
