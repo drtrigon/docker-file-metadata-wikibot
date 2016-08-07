@@ -23,7 +23,7 @@ install:
 script:
   - docker images ; docker ps -a ;
   # - export DOCKERCONTAINER=`docker run -d $REPO:$COMMIT` ;
-  - docker run --name $CONTAINER -it $REPO:$COMMIT bash &
+  - docker run --name $CONTAINER -d $REPO:$COMMIT tail -f /dev/null ;
   - docker exec $CONTAINER wikibot-filemeta-log -help || true ;
   - docker exec $CONTAINER wikibot-filemeta-simple -help || true ;
   # - docker exec $CONTAINER wikibot-create-config ;
